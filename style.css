@@ -1,0 +1,134 @@
+body {
+    background-color: #f0ecff;
+}
+
+.img-size {
+    width: 40px;
+    height: 40px;
+}
+
+h6 {
+    color: rgb(194, 194, 194);
+}
+
+.card {
+    margin-top: 30px;
+}
+
+#succussAlert {
+    position: fixed;
+    z-index: 999999;
+    width: 30%;
+    bottom: 0;
+    right: 0;
+}
+
+#tags {
+    background-color: gray;
+    color: white;
+}
+
+#add-btn {
+    /* background-color: gray; */
+    position: fixed;
+    bottom: 5%;
+    right: 7%;
+    height: 70px;
+    width: 70px;
+    font-size: 50px;
+    color: white;
+    cursor: pointer;
+    border-radius: 100px;
+    text-align: center;
+    line-height: 1.29;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.3);
+    z-index: 9999;
+}
+
+#post-body-input {
+    width: 100%;
+    height: 100px;
+    border-color: grey;
+    border-radius: 10px;
+    resize: none;
+}
+
+#pic-profile {
+    height: 40px;
+    width: 40px;
+}
+
+#card-body {
+    cursor: pointer;
+}
+
+#main-info-image {
+    height: 120px;
+    width: 120px;
+    border-radius: 200px !important;
+}
+
+.number-info {
+    color: rgb(172, 172, 172);
+    font-weight: 100;
+    font-size: 20px;
+}
+
+.number-info span {
+    font-size: 50px;
+    color: black;
+}
+
+/* LOADER PAGE*/
+
+.loader {
+    display: flex;
+    align-items: center;
+  }
+  
+  .bar {
+    display: inline-block;
+    width: 3px;
+    height: 20px;
+    background-color: rgba(0, 0, 0, .5);
+    border-radius: 10px;
+    animation: scale-up4 1s linear infinite;
+  }
+  
+  .bar:nth-child(2) {
+    height: 35px;
+    margin: 0 5px;
+    animation-delay: .25s;
+  }
+  
+  .bar:nth-child(3) {
+    animation-delay: .5s;
+  }
+  
+  @keyframes scale-up4 {
+    20% {
+      background-color: #ffff;
+      transform: scaleY(1.5);
+    }
+  
+    40% {
+      transform: scaleY(1);
+    }
+  }
+
+#loader-page {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    background-color: rgba(128, 128, 128, 0.554);
+    width: 70px;
+    height: 70px;
+    border-radius: 30px;
+}

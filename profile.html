@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--    import scripts + css link -->
+    <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/node_modules/axios/dist/axios.js"></script>
+    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
+
+    <!-- // -->
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body>
+    <!--====== LOADER PAGE =====-->
+    <div id="loader-page">
+      <div class="loader">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+    </div>
+    </div>
+    <!--====== LOADER PAGE =====-->
+    
+    <!--====== MODEL ======-->
+
+    <!--LOGIN MODEL -->
+    <div class="modal fade" id="login-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Login</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form>
+                <div class="mb-3">
+                  <label for="recipient-name" class="col-form-label">Username:</label>
+                  <input type="text" class="form-control" id="username-input" value="qwerty">
+                </div>
+                <div class="mb-3">
+                  <label for="message-text" class="col-form-label">Password:</label>
+                  <input type="password" class="form-control" id="password-input" value="123456">
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" onclick="loginBtnClicked()" class="btn btn-primary">Login</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    <!--// LOGIN MODEL //-->
+
+    <!-- REGISTER MODEL -->
+    <div class="modal fade" id="register-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Register A New User</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form>
+
+              <div class="mb-3">
+                <label for="recipient-name" class="col-form-label">Profile Image:</label>
+                <input type="file" class="form-control" id="register-image-input">
+              </div>
+
+              <div class="mb-3">
+                <label for="recipient-name" class="col-form-label">Name:</label>
+                <input type="text" class="form-control" id="register-name-input">
+              </div>
+
+              <div class="mb-3">
+                <label for="recipient-name" class="col-form-label">Username:</label>
+                <input type="text" class="form-control" id="register-username-input">
+              </div>
+
+              <div class="mb-3">
+                <label for="message-text" class="col-form-label">Password:</label>
+                <input type="password" class="form-control" id="register-password-input">
+              </div>
+
+              <!-- <div class="mb-3">
+                <label for="recipient-name" class="col-form-label">Image:</label>
+                <input type="file" class="form-control" id="post-image-input">
+              </div> -->
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" onclick="registerBtnClicked()" class="btn btn-primary">Register</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--// REGISTER MODEL //-->
+
+    <!-- CREATE POST MODEL -->
+    <div class="modal fade" id="create-post-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="post-model-title">Create A New Post</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="mb-3">
+                <label for="recipient-name" class="col-form-label">Title:</label>
+                <input type="text" class="form-control" id="post-title-input">
+
+                <input type="hidden" id="post-id-input" value="">
+              </div>
+
+              <div class="mb-3">
+                <textarea name="body" id="post-body-input"></textarea>
+              </div>
+
+              <div class="mb-3">
+                <label for="recipient-name" class="col-form-label">Image:</label>
+                <input type="file" class="form-control" id="post-image-input">
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button id="post-model-submit-btn" type="button" onclick="createNewPostClicked()" class="btn btn-primary">Create</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--// CREATE POST MODEL //-->
+
+    <!-- DELETE POST MODEL -->
+    <div class="modal fade" id="delete-post-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="post-model-title">Are you sure you want to delete the post?
+            <span id="delete-post-title"></span>
+            </h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+            <input type="hidden" id="delete-post-id-input" value="">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button id="post-model-submit-btn" type="button" onclick="confirmPostDelete()" class="btn btn-danger">Yes Delete</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--// DELETE POST MODEL //-->
+
+    <!--// ====== MODEL ====== //-->
+
+    <!--==== Add Post Button ====-->
+        <div class="bg-primary" id="add-btn" onclick="addBtnClicked()">
+            +
+        </div>
+    <!--//==== Add Post Button ====//-->
+      
+      
+    <!--====== ALERTS ======-->
+      
+        <div id="succussAlert" class="show fade"></div>
+      
+    <!--// ALERTS //-->
+      
+      
+    <!-- NAV BAR -->
+        <div class="container pt-2">
+              <div class="d-flex justify-content-center">
+                  <div class="col-9">
+                      <nav class="navbar navbar-expand-lg bg-body-tertiary shadow rounded">
+                          <div class="container-fluid">
+                            <a class="navbar-brand" href="Home.html">Instagram</a>
+                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                              <span class="navbar-toggler-icon"></span>
+                            </button>
+                            <div class="collapse navbar-collapse" id="navbarNav">
+                              <ul class="navbar-nav">
+                                <li class="nav-item">
+                                  <a class="nav-link active" aria-current="page" href="Home.html">Home</a>
+                                </li>
+                                <li class="nav-item">
+                                  <a class="nav-link" onclick="profileClicked()" style="cursor: pointer;">Profile</a>
+                                </li>
+                              </ul>
+                              <!-- FOR NON LOGGED IN USER -->
+                              <div class="d-flex w-100 justify-content-end" id="logged-in-div">
+                                  <button type="button" class="btn btn-outline-success mx-2" data-bs-toggle="modal" data-bs-target="#login-modal" value="MKN97">Login</button>
+                                  <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#register-modal" value="123123">Register</button>
+                              </div>
+                              <!--// FOR NON LOGGED IN USER //-->
+      
+                              <!-- FOR LOGGED IN USER -->
+                              <div class="d-flex w-100 justify-content-end align-items-center" id="logout-div">
+                                <img id="nav-user-image" class="rounded-circle" id="pic-profile" style="height: 40px; width: 40px;" src="/profile-pics/pic1.png" alt="">
+                                <b id="nav-username">
+                                  @MKN-97
+                                </b>
+                                <button onclick="logout()" type="button" class="btn btn-outline-danger mx-2" data-bs-toggle="modal">Logout</button>
+                              </div>
+                              <!--// FOR LOGGED IN USER //-->
+                            </div>
+                          </div>
+                        </nav>
+                  </div>
+              </div>
+        </div>
+    <!--// NAV BAR //-->
+
+        <!-- MAIN CONTENT -->
+        <div class="container mb-3">
+            <div class="d-flex justify-content-center mt-5">
+                <div class="col-9">
+                    <!-- MAIN INFO -->
+                        <div class="card shadow">
+                              <div class="card-body">
+                                <div class="row">
+                                  <!-- USER IMAGE COL -->
+                                  <div class="col-2">
+                                    <img src="/profile-pics/pic1.png" alt="" id="main-info-image">
+                                  </div>
+                                  <!--// USER IMAGE COL //-->
+
+                                  <!-- USERNAME - EMAIL - NAME -->
+                                  <div id="main-info" class="col-4 d-flex flex-column justify-content-evenly" style="font-weight: 500;">
+                                    <div class="user-main-info" id="main-info-email">
+                                      Mohammed@gmail.com
+                                    </div>
+                                    <div class="user-main-info" id="main-info-name">
+                                      Mohammed
+                                    </div>
+                                    <div class="user-main-info" id="main-info-username">
+                                      MohammedMKN
+                                    </div>
+                                  </div>
+                                  <!--// USERNAME - EMAIL - NAME //-->
+
+                                  <!-- POST & COMMENTS COUNT -->
+                                  <div class="col-4 d-flex flex-column justify-content-evenl">
+                                    <div class="number-info">
+                                      <span id="posts-count">13</span> Posts
+                                    </div>
+                                    <div class="number-info">
+                                      <span id="comments-count">20</span> Comments
+                                    </div>
+                                  </div>
+                                  <!--// POST & COMMENTS COUNT //-->
+                                </div>
+                              </div>
+                        </div>
+                    <!--// MAIN INFO //-->
+
+                    <!-- POSTS TITLE -->
+                    <div class="row mt-5">
+                      <h1><span id="main-info-post-name">Mohammed</span>'s Posts</h1>
+                    </div>
+                    <!--// POSTS TITLE //-->
+
+                    <!-- POSTS -->
+                    <div class="row" id="user-posts">
+
+                      <!-- POST -->
+                        <div class="card shadow">
+                              <div class="card-header">
+                                  <img class="img-size rounded-circle border border-3" src="/profile-pics/pic1.png" alt="">
+                                  <b>Mohammed</b>
+                                  
+                              </div>
+                              <div class="card-body" id="card-body" onclick="postClicked()">
+                                      <img class="w-100" src="/profile-pics/img1.jpg" alt="">
+                  
+                                      <h6 class="mt-2">
+                                          ${post.created_at}
+                                      </h6>
+                  
+                                      <h5>${postTitle}</h5>
+                  
+                                      <p>
+                                          ${post.body}
+                                      </p>
+                  
+                                      <hr>
+                  
+                                      <div>
+                                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
+                                              <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
+                                          </svg>
+                                          <span>
+                                              (${post.comments_count}) Comments
+                  
+                                              <span id="post-tags">
+                                                  
+                                              </span>
+                                          </span>
+                                      </div>
+                              </div>
+                        </div>   
+                      <!--// POST //-->
+                    </div>
+                    <!--// POSTS //-->
+                </div>
+            </div>            
+        <!--// MAIN CONTENT //-->
+
+</body>
+<script src="/mainLogic.js"></script>
+<script src="/profileScript.js"></script>
+
+</html>
