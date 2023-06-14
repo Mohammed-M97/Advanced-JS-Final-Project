@@ -6,7 +6,7 @@
 # Spark
 
 Spark is an social media
-Spark is a photo sharing social networking Platforms. The app allows users to upload posts. Users can browse other users, view trending content, And user can edit or delet posts
+Spark is a photo sharing social networking Platforms. The app allows users to upload posts. Users can browse other users, view trending content, And user can edit or delet posts.
 
 Tools:
-HTML, CSS, Bootstrap, Javascript and axios
+HTML, CSS, Bootstrap, Javascript and axios.
